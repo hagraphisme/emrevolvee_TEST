@@ -1,0 +1,4 @@
+- [x] Uniformiser la clé localStorage sous le nom 'token' dans login.html
+- [x] Ajuster les gardes de sécurité et la déconnexion dans dashboard.html avec la clé 'token'
+- [x] Valider le comportement de redirection automatique avec le sous-agent navigateur
+- [x] Mettre à jour le walkthrough final

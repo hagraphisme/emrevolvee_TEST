@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Admin | EMREVOLVEE Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+    <!-- Blurred Background underlay -->
+    <div class="desktop-bg-blur" style="background-image: url('photo.png');" id="dashboard-bg-blur"></div>
+
+    <div class="dashboard-container">
+        
+        <!-- Header Controls -->
+        <header class="dashboard-header">
+            <div class="header-logo-side">
+                <div class="dashboard-icon-bg">
+                    <i data-lucide="sliders"></i>
+                </div>
+                <div>
+                    <h1 class="dashboard-title">Console de Gestion</h1>
+                    <p class="dashboard-subtitle">Modifiez le contenu en direct de votre page</p>
+                </div>
+            </div>
+            <div class="header-action-side">
+                <a href="index.html" class="live-view-btn" target="_blank" title="Visualiser la page publique">
+                    <i data-lucide="eye"></i>
+                    <span>Voir le site</span>
+                </a>
+                <button class="logout-btn" id="logout-btn" title="Se déconnecter">
+                    <i data-lucide="log-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Form Section -->
+        <main class="dashboard-main-card">
+            
+            <form id="dashboard-form">
+                
+                <!-- SECTION 1 : Informations de Profil -->
+                <fieldset class="form-section">
+                    <legend class="section-legend">
+                        <i data-lucide="user"></i> Profil Principal
+                    </legend>
+                    
+                    <div class="form-row-grid-2">
+                        <!-- Name field -->
+                        <div class="form-group">
+                            <label for="profile-name-input" class="form-label">Nom d'utilisateur</label>
+                            <input type="text" id="profile-name-input" class="form-input-text" required>
+                        </div>
+                        <!-- Tags field -->
+                        <div class="form-group">
+                            <label for="profile-tags-input" class="form-label">Catégories (séparées par des virgules)</label>
+                            <input type="text" id="profile-tags-input" class="form-input-text" placeholder="Peptides, BioHacking, Glow Up" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row-grid-1">
+                        <!-- Bio / Statement field -->
+                        <div class="form-group">
+                            <label for="profile-statement-input" class="form-label">Accroche sous la photo (Titre de carte)</label>
+                            <textarea id="profile-statement-input" class="form-input-textarea" rows="2" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row-grid-1">
+                        <!-- Photo Banner Field -->
+                        <div class="form-group">
+                            <label class="form-label">Photo d'arrière-plan du profil</label>
+                            <div class="file-uploader-box">
+                                <label for="profile-photo-input" class="file-upload-label">
+                                    <i data-lucide="image"></i>
+                                    <span class="upload-btn-text" id="upload-btn-text">Modifier la photo (.png, .jpg)</span>
+                                </label>
+                                <input type="file" id="profile-photo-input" accept="image/*" class="file-input-hidden">
+                                <div class="file-preview-container" id="photo-preview-container" style="display: none;">
+                                    <img id="photo-preview" src="" alt="Aperçu du téléversement">
+                                    <button type="button" class="remove-preview-btn" id="remove-preview-btn" title="Supprimer la nouvelle photo">
+                                        <i data-lucide="trash-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <span class="field-help-text">La photo sera convertie en Base64 et stockée localement.</span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 2 : Les guides offerts -->
+                <fieldset class="form-section">
+                    <legend class="section-legend">
+                        <i data-lucide="book-open"></i> Section : Les guides offerts
+                    </legend>
+                    
+                    <!-- Link 1 (Glow up PEPS) -->
+                    <div class="link-edit-card">
+                        <h4 class="link-edit-title">Guide 1 : Glow up PEPS</h4>
+                        <div class="form-row-grid-2">
+                            <div class="form-group">
+                                <label for="link1-title" class="form-label">Titre principal</label>
+                                <input type="text" id="link1-title" class="form-input-text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="link1-url" class="form-label">Lien / URL</label>
+                                <input type="url" id="link1-url" class="form-input-text" required>
+                            </div>
+                        </div>
+                        <div class="form-row-grid-1">
+                            <div class="form-group">
+                                <label for="link1-subtitle" class="form-label">Description du guide</label>
+                                <input type="text" id="link1-subtitle" class="form-input-text" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Link 2 (Guide PEPS complet) -->
+                    <div class="link-edit-card">
+                        <h4 class="link-edit-title">Guide 2 : Guide PEPS complet</h4>
+                        <div class="form-row-grid-2">
+                            <div class="form-group">
+                                <label for="link2-title" class="form-label">Titre principal</label>
+                                <input type="text" id="link2-title" class="form-input-text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="link2-url" class="form-label">Lien / URL</label>
+                                <input type="url" id="link2-url" class="form-input-text" required>
+                            </div>
+                        </div>
+                        <div class="form-row-grid-1">
+                            <div class="form-group">
+                                <label for="link2-subtitle" class="form-label">Description du guide</label>
+                                <input type="text" id="link2-subtitle" class="form-input-text" required>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 3 : Bienvenue dans le vrai cercle -->
+                <fieldset class="form-section">
+                    <legend class="section-legend">
+                        <i data-lucide="users"></i> Section : Bienvenue dans le vrai cercle
+                    </legend>
+                    
+                    <!-- Link 3 (Telegram) -->
+                    <div class="link-edit-card">
+                        <h4 class="link-edit-title">Lien 3 : Canal Telegram</h4>
+                        <div class="form-row-grid-2">
+                            <div class="form-group">
+                                <label for="link3-title" class="form-label">Titre affiché</label>
+                                <input type="text" id="link3-title" class="form-input-text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="link3-url" class="form-label">Lien Telegram / URL</label>
+                                <input type="url" id="link3-url" class="form-input-text" required>
+                            </div>
+                        </div>
+                        <div class="form-row-grid-1" style="margin-top: 1rem;">
+                            <div class="form-group">
+                                <label for="link3-subtitle" class="form-label">Description / Accroche (Bonus)</label>
+                                <input type="text" id="link3-subtitle" class="form-input-text" placeholder="Description facultative">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Link 4 (Calendly - Session PEPS) -->
+                    <div class="link-edit-card">
+                        <h4 class="link-edit-title">Lien 4 : Session Calendly (CTA Doré)</h4>
+                        <div class="form-row-grid-2">
+                            <div class="form-group">
+                                <label for="link4-title" class="form-label">Titre principal</label>
+                                <input type="text" id="link4-title" class="form-input-text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="link4-url" class="form-label">Lien Calendly / URL</label>
+                                <input type="url" id="link4-url" class="form-input-text" required>
+                            </div>
+                        </div>
+                        <div class="form-row-grid-1">
+                            <div class="form-group">
+                                <label for="link4-subtitle" class="form-label">Description d'accompagnement</label>
+                                <input type="text" id="link4-subtitle" class="form-input-text" required>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 4 : Réseaux Sociaux (Pied de Page) -->
+                <fieldset class="form-section">
+                    <legend class="section-legend">
+                        <i data-lucide="share-2"></i> Réseaux Sociaux &amp; Partage
+                    </legend>
+                    <div class="form-row-grid-2">
+                        <div class="form-group">
+                            <label for="social-instagram" class="form-label">Lien Instagram</label>
+                            <input type="url" id="social-instagram" class="form-input-text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="social-tiktok" class="form-label">Lien TikTok</label>
+                            <input type="url" id="social-tiktok" class="form-input-text" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Les identifiants sont maintenant gérés directement dans Strapi -->
+
+                <!-- Save Trigger -->
+                <div class="dashboard-footer-actions">
+                    <button type="submit" class="save-changes-btn">
+                        <span>Enregistrer les modifications</span>
+                        <i data-lucide="save"></i>
+                    </button>
+                </div>
+
+            </form>
+
+        </main>
+        
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div class="toast" id="toast-notif">
+        <div class="toast-content">
+            <i data-lucide="check-circle" class="toast-icon"></i>
+            <span class="toast-message">Modifications enregistrées avec succès !</span>
+        </div>
+    </div>
+
+    <!-- Script de gestion Dashboard -->
+    <script>
+        const STRAPI_URL = "http://localhost:1337";
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialiser les icônes Lucide
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Détecter si l'utilisateur est authentifié avec un JWT
+            const jwt = localStorage.getItem('token');
+            if (!jwt) {
+                localStorage.removeItem('token'); // Nettoyage de précaution
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Éléments du DOM
+            const logoutBtn = document.getElementById('logout-btn');
+            const dashboardForm = document.getElementById('dashboard-form');
+            const toast = document.getElementById('toast-notif');
+            
+            // Éléments de champs de formulaire
+            const nameInput = document.getElementById('profile-name-input');
+            const tagsInput = document.getElementById('profile-tags-input');
+            const statementInput = document.getElementById('profile-statement-input');
+            const photoInput = document.getElementById('profile-photo-input');
+            
+            const link1Title = document.getElementById('link1-title');
+            const link1Subtitle = document.getElementById('link1-subtitle');
+            const link1Url = document.getElementById('link1-url');
+            
+            const link2Title = document.getElementById('link2-title');
+            const link2Subtitle = document.getElementById('link2-subtitle');
+            const link2Url = document.getElementById('link2-url');
+            
+            const link3Title = document.getElementById('link3-title');
+            const link3Subtitle = document.getElementById('link3-subtitle');
+            const link3Url = document.getElementById('link3-url');
+            
+            const link4Title = document.getElementById('link4-title');
+            const link4Subtitle = document.getElementById('link4-subtitle');
+            const link4Url = document.getElementById('link4-url');
+
+            const socialInstagram = document.getElementById('social-instagram');
+            const socialTiktok = document.getElementById('social-tiktok');
+            
+            // Image Preview elements
+            const uploadBtnText = document.getElementById('upload-btn-text');
+            const previewContainer = document.getElementById('photo-preview-container');
+            const previewImg = document.getElementById('photo-preview');
+            const removePreviewBtn = document.getElementById('remove-preview-btn');
+
+            let strapiPhotoId = null; // ID de l'image stockée dans Strapi
+            let selectedFile = null;  // Fichier réel sélectionné à uploader
+
+            // 1. Charger les données du Profil depuis Strapi
+            try {
+                const response = await fetch(`${STRAPI_URL}/api/profil?populate=*`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${jwt}`
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        // Session expirée ou invalide -> nettoyage obligatoire
+                        localStorage.removeItem('token');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    if (response.status === 403) {
+                        throw new Error("Erreur 403 (Accès interdit) : Veuillez activer les permissions 'find' et 'update' pour le Single Type 'Profil' dans Strapi (Réglages > Rôles > Authenticated).");
+                    }
+                    throw new Error(`Erreur ${response.status} : Impossible de charger le profil depuis Strapi.`);
+                }
+
+                const resData = await response.json();
+                const attrs = resData.data?.attributes || resData.data;
+
+                if (attrs) {
+                    // Remplir les champs avec les noms exacts Strapi
+                    nameInput.value = attrs.nom_utilisateur || "";
+                    
+                    // Gestion des tags (Array ou String)
+                    const tagsRaw = attrs.categories || "";
+                    tagsInput.value = Array.isArray(tagsRaw) ? tagsRaw.join(', ') : tagsRaw;
+
+                    statementInput.value = attrs.accroche || "";
+                    
+                    // Guides / Liens
+                    link1Title.value = attrs.guide_1_titre || "";
+                    link1Subtitle.value = attrs.guide_1_description || "";
+                    link1Url.value = attrs.guide_1_url || "";
+
+                    link2Title.value = attrs.guide_2_titre || "";
+                    link2Subtitle.value = attrs.guide_2_description || "";
+                    link2Url.value = attrs.guide_2_url || "";
+
+                    link3Title.value = attrs.lien_3_titre || "";
+                    link3Subtitle.value = attrs.lien_3_description || "";
+                    link3Url.value = attrs.lien_3_url || "";
+
+                    link4Title.value = attrs.lien_4_titre || "";
+                    link4Subtitle.value = attrs.lien_4_description || "";
+                    link4Url.value = attrs.lien_4_url || "";
+
+                    // Sociaux
+                    socialInstagram.value = attrs.instagram_url || "";
+                    socialTiktok.value = attrs.tiktok_url || "";
+
+                    // Gérer la photo de profil Strapi
+                    const photoRelation = attrs.photo_arriere_plan;
+                    if (photoRelation && photoRelation.data) {
+                        const media = photoRelation.data.attributes || photoRelation.data;
+                        strapiPhotoId = photoRelation.data.id;
+                        const mediaUrl = media.url.startsWith('http') ? media.url : `${STRAPI_URL}${media.url}`;
+                        
+                        previewImg.src = mediaUrl;
+                        previewContainer.style.display = 'flex';
+                        uploadBtnText.textContent = "Modifier la photo chargée";
+                        document.getElementById('dashboard-bg-blur').style.backgroundImage = `url('${mediaUrl}')`;
+                    }
+                }
+            } catch(err) {
+                console.error("Erreur de chargement Strapi :", err);
+                showToast("Erreur de connexion au serveur Strapi.", true);
+            }
+
+            // Gérer le changement de fichier photo
+            photoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    selectedFile = file;
+                    // Aperçu local rapide avec URL objet
+                    const localUrl = URL.createObjectURL(file);
+                    previewImg.src = localUrl;
+                    previewContainer.style.display = 'flex';
+                    uploadBtnText.textContent = "Nouvelle photo en attente d'enregistrement";
+                    document.getElementById('dashboard-bg-blur').style.backgroundImage = `url('${localUrl}')`;
+                }
+            });
+
+            // Gérer la suppression de la photo
+            removePreviewBtn.addEventListener('click', () => {
+                strapiPhotoId = null;
+                selectedFile = null;
+                photoInput.value = '';
+                previewContainer.style.display = 'none';
+                uploadBtnText.textContent = "Modifier la photo (.png, .jpg)";
+                document.getElementById('dashboard-bg-blur').style.backgroundImage = `url('photo.png')`;
+            });
+
+            // Enregistrement des modifications du profil
+            dashboardForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const submitBtn = dashboardForm.querySelector('.save-changes-btn');
+                const originalBtnContent = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>Enregistrement en cours...</span><i data-lucide="loader" class="spinner tiny-loader"></i>';
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+
+                try {
+                    // 1. Upload de la photo si un fichier local a été choisi
+                    if (selectedFile) {
+                        const uploadForm = new FormData();
+                        uploadForm.append('files', selectedFile);
+
+                        const uploadRes = await fetch(`${STRAPI_URL}/api/upload`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${jwt}`
+                            },
+                            body: uploadForm
+                          });
+
+                          if (!uploadRes.ok) {
+                              throw new Error("Échec du téléversement de la photo.");
+                          }
+
+                          const uploadData = await uploadRes.json();
+                          if (uploadData && uploadData[0]) {
+                              strapiPhotoId = uploadData[0].id;
+                          }
+                      }
+
+                      // 2. Construire la charge utile de mise à jour avec les champs exacts
+                      const dataPayload = {
+                          nom_utilisateur: nameInput.value.trim(),
+                          accroche: statementInput.value.trim(),
+                          categories: tagsInput.value.trim(),
+                          
+                          guide_1_titre: link1Title.value.trim(),
+                          guide_1_description: link1Subtitle.value.trim(),
+                          guide_1_url: link1Url.value.trim(),
+
+                          guide_2_titre: link2Title.value.trim(),
+                          guide_2_description: link2Subtitle.value.trim(),
+                          guide_2_url: link2Url.value.trim(),
+
+                          lien_3_titre: link3Title.value.trim(),
+                          lien_3_description: link3Subtitle.value.trim(),
+                          lien_3_url: link3Url.value.trim(),
+
+                          lien_4_titre: link4Title.value.trim(),
+                          lien_4_description: link4Subtitle.value.trim(),
+                          lien_4_url: link4Url.value.trim(),
+
+                          instagram_url: socialInstagram.value.trim(),
+                          tiktok_url: socialTiktok.value.trim(),
+
+                          // Liaison Média ID
+                          photo_arriere_plan: strapiPhotoId
+                      };
+
+                      // Envoi de la requête de modification
+                      const updateRes = await fetch(`${STRAPI_URL}/api/profil`, {
+                          method: 'PUT',
+                          headers: {
+                              'Authorization': `Bearer ${jwt}`,
+                              'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({ data: dataPayload })
+                      });
+
+                      if (!updateRes.ok) {
+                          if (updateRes.status === 401) {
+                              // Session expirée ou invalide -> nettoyage obligatoire
+                              localStorage.removeItem('token');
+                              window.location.href = 'login.html';
+                              return;
+                          }
+                          if (updateRes.status === 403) {
+                              throw new Error("Erreur 403 (Modification interdite) : Vérifiez que le rôle 'Authenticated' dispose bien de la permission 'update' pour le Single Type 'Profil' dans Strapi.");
+                          }
+                          throw new Error("Impossible d'enregistrer les données dans Strapi.");
+                      }
+
+                      // Réinitialiser le fichier d'upload
+                      selectedFile = null;
+                      showToast("Modifications enregistrées avec succès !");
+                  } catch(err) {
+                      console.error("Erreur de sauvegarde Strapi :", err);
+                      showToast(err.message || "Erreur de sauvegarde.", true);
+                  } finally {
+                      submitBtn.disabled = false;
+                      submitBtn.innerHTML = originalBtnContent;
+                      if (typeof lucide !== 'undefined') lucide.createIcons();
+                  }
+              });
+
+              function showToast(message, isError = false) {
+                  const toastMsg = toast.querySelector('.toast-message');
+                  const toastIcon = toast.querySelector('.toast-icon');
+                  toastMsg.textContent = message;
+
+                  if (isError) {
+                      toast.classList.add('error');
+                      if (toastIcon) {
+                          toastIcon.setAttribute('data-lucide', 'alert-circle');
+                          if (typeof lucide !== 'undefined') lucide.createIcons();
+                      }
+                  } else {
+                      toast.classList.remove('error');
+                      if (toastIcon) {
+                          toastIcon.setAttribute('data-lucide', 'check-circle');
+                          if (typeof lucide !== 'undefined') lucide.createIcons();
+                      }
+                  }
+                  
+                  toast.classList.add('active');
+                  setTimeout(() => {
+                      toast.classList.remove('active');
+                  }, 3000);
+              }
+
+              // Déconnexion
+              logoutBtn.addEventListener('click', () => {
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('emrevolvee_logged_in');
+                  window.location.href = 'login.html';
+              });
+          });
+      </script>
+</body>
+</html>
