@@ -1,6 +1,0 @@
-- [x] Importer la bibliothèque bcryptjs via le bon CDN (bcrypt.min.js) dans login.html et dashboard.html
-- [x] Implémenter le hachage automatique à la volée du mot de passe en clair par défaut (compatibilité ascendante)
-- [x] Utiliser dcodeIO.bcrypt.compareSync pour valider l'authentification dans login.html
-- [x] Utiliser dcodeIO.bcrypt.hashSync pour hacher le nouveau mot de passe dans dashboard.html
-- [x] Valider le bon fonctionnement du hachage et du déploiement statique via le sous-agent navigateur
-- [x] Mettre à jour le walkthrough final
